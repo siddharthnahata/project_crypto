@@ -14,7 +14,6 @@ app = FastAPI(title="ML API with Scaling & Label Encoding")
 class InputData(BaseModel):
     volume_24h: float
     mkt_cap: float
-    Liquidity_Ratio: float
     h1: float
     h24: float
     d7: float
@@ -24,8 +23,7 @@ def predict(data: InputData):
     # Convert input to DataFrame
     df = pd.DataFrame([{
         "24h_volume": data.volume_24h,
-        "mkt_cap": data.mkt_cap,
-        "Liquidity_Ratio": data.Liquidity_Ratio,
+        "mkt_cap": data.mkt_cap,        
         "1h": data.h1,
         "24h": data.h24,
         "7d": data.d7
