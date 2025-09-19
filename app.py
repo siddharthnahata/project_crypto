@@ -22,15 +22,15 @@ class InputData(BaseModel):
 def predict(data: InputData):
     # Convert input to DataFrame
     df = pd.DataFrame([{
-        "24h_volume": data.volume_24h,
-        "mkt_cap": data.mkt_cap,        
         "1h": data.h1,
         "24h": data.h24,
-        "7d": data.d7
+        "7d": data.d7,
+        "24h_volume": data.volume_24h,
+        "mkt_cap": data.mkt_cap               
     }])
 
     # Predict
     pred_encoded = pipeline.predict(df)[0]
     pred_label = label_encoder.inverse_transform([pred_encoded])[0]
 
-    return {"prediction": pred_label}
+    return {"prediction": pred_label, "pred": str(pred_encoded)}
