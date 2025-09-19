@@ -75,7 +75,7 @@ http://localhost:5000/predict
 
 ## Models Used
 
-* [XGBoost Classifier](https://xgboost.readthedocs.io/en/stable/)
+* [CatBoost Classifier](https://catboost.ai/docs/en/concepts/python-reference_catboostclassifier)
 
 **Components** : Contains all components of Machine Learning Project
 
