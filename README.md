@@ -82,13 +82,20 @@ http://localhost:5000/predict
 - Data Ingestion
 - Data Validation
 - Data Transformation
-- Data Clustering
 - Model Trainer
 - Model Evaluation
 - Model Pusher
 
+## Project Summary
+
+1. We feteched the data from the above dataset link.
+2. In notebook folder EDA.ipynb file we processed data like creating some new features and droping unnecessary features
+3. Then we conducted Univarite, Bivariate and Multivariate analysis the noted observations.
+4. After that we made src file which contain 2 scripts of which one is preprocessing.py which have function which handles the data and scaling of it.
+5. Other script which is train.py which train the model with help of first script and store .pkl file of the model in modols folder.
+6. Created app.py script which runs the model on local host.
+7. Created run.py which is also way to run app.py with python command.
+
 ## Conclusion
 
 - This Project can be used in real-life by Users.
-
-
