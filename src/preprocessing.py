@@ -3,7 +3,7 @@ import numpy as np
 from sklearn.preprocessing import LabelEncoder, StandardScaler
 from sklearn.compose import ColumnTransformer
 from sklearn.pipeline import Pipeline
-from xgboost import XGBClassifier
+from catboost import CatBoostClassifier
 
 import warnings
 warnings.filterwarnings("ignore")
@@ -54,6 +54,7 @@ def preprocess(df: pd.DataFrame) -> pd.DataFrame:
         bins=[-float('inf'), 0.02, 0.12, float('inf')],
         labels=['Low', 'Stable', 'High']
     )
+    df.drop('Liquidity_Ratio', axis=1, inplace=True) # droping it due to it will cause biasness in the model as directly related to the coin volaitlty
     return df
 
 def build_pipeline():
@@ -61,7 +62,7 @@ def build_pipeline():
         Build ML pipeline with preprocessing + model
     """
     scale_cols = ["24h_volume", "mkt_cap"]
-    passthrough_cols = ["Liquidity_Ratio", "1h", "24h", "7d"]
+    passthrough_cols = ["1h", "24h", "7d"]
 
     preprocessor = ColumnTransformer(
         transformers=[
@@ -71,8 +72,9 @@ def build_pipeline():
     )
     pipeline = Pipeline([
         ("preprocessor", preprocessor),
-        ("model", XGBClassifier(use_label_encoder=False, eval_metric="logloss", verbosity=0))
+        ("model", CatBoostClassifier(depth=6, iterations=200, l2_leaf_reg=5, learning_rate=0.1))
     ])
+
     return pipeline
 
 def encode_target(y: pd.Series):
