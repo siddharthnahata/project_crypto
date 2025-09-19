@@ -33,4 +33,4 @@ def predict(data: InputData):
     pred_encoded = pipeline.predict(df)[0]
     pred_label = label_encoder.inverse_transform([pred_encoded])[0]
 
-    return {"prediction": pred_label, "pred": str(pred_encoded)}
+    return {"prediction": pred_label}
